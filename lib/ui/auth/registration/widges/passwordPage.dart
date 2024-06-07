@@ -14,7 +14,7 @@ class PasswordPage extends StatefulWidget {
 class _PasswordPageState extends State<PasswordPage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
 
   late FocusNode password;
   late FocusNode submit;
@@ -33,6 +33,42 @@ class _PasswordPageState extends State<PasswordPage> {
     password.dispose();
     submit.dispose();
     super.dispose();
+  }
+
+  bool _isValid = false;
+  String _errorMessage = '';
+
+  bool _validatePassword(String password) {
+    // Reset error message
+    _errorMessage = '';
+
+    // Password length greater than 6
+    if (password.length <6) {
+      _errorMessage += '• Password must be longer than 6 characters.\n';
+    }
+
+    // Contains at least one uppercase letter
+    if (!password.contains(RegExp(r'[A-Z]'))) {
+      _errorMessage += '• Uppercase letter is missing.\n';
+    }
+
+    // Contains at least one lowercase letter
+    if (!password.contains(RegExp(r'[a-z]'))) {
+      _errorMessage += '• Lowercase letter is missing.\n';
+    }
+
+    // Contains at least one digit
+    if (!password.contains(RegExp(r'[0-9]'))) {
+      _errorMessage += '• Digit is missing.\n';
+    }
+
+    // Contains at least one special character
+    if (!password.contains(RegExp(r'[!@#%^&*(),.?":{}|<>]'))) {
+      _errorMessage += '• Special character is missing.\n';
+    }
+
+    // If there are no error messages, the password is valid
+    return _errorMessage.isEmpty;
   }
 
 
@@ -92,7 +128,8 @@ class _PasswordPageState extends State<PasswordPage> {
                           )
                         ]),
                         child: TextFormField(
-                          controller: emailController,
+                          controller: passController,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           autofocus: true,
                           textInputAction: TextInputAction.done,
                           focusNode: password,
@@ -105,12 +142,9 @@ class _PasswordPageState extends State<PasswordPage> {
                           },
                           obscureText: !passVisible,
                           validator: (value){
-                            if(value!.isEmpty){
-                              return 'Enter your password';
-                            }
-                            else if (!RegExp(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$")
-                                .hasMatch(value)) {
-                              return 'Enter a valid password';
+                            _isValid = _validatePassword(passController.text);
+                            if(_isValid != true){
+                              return _errorMessage;
                             }
                             return null;
                           },

@@ -1,5 +1,6 @@
 import 'package:evie_ui_test/ui/auth/login/widgets/welcomeBack.dart';
 import 'package:evie_ui_test/ui/auth/registerORlogin/pages/RegisterOrLogin.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 

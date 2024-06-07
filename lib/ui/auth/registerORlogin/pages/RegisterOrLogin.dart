@@ -28,7 +28,7 @@ class RegisterOrLogin extends StatelessWidget {
                 children: [
                   WelcomeHeader(),
                   Container(
-                    height: 250,
+                    height: screenHeight * 0.35,
                     alignment: Alignment.center,
                     child: const Image(
                       image: AssetImage('assets/img/welcome-ring2.png'),

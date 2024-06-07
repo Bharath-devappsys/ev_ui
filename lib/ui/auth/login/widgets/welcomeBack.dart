@@ -284,7 +284,13 @@ class _WelcomeBackState extends State<WelcomeBack> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset("assets/img/Group.png"),
+                            Container(
+                              height : screenWidth * 0.055,
+                              alignment: Alignment.center,
+                              child: const Image(
+                                image: AssetImage('assets/img/google.png'),
+                              ),
+                            ),
                             SizedBox(
                               width: 12,
                             ),

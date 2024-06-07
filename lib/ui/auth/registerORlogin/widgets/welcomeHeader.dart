@@ -9,16 +9,17 @@ class WelcomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double sh = MediaQuery.of(context).size.height;
     return Column(
       children: [
         SizedBox(
           height: 25,
         ),
         Container(
-          height: 100,
+          height: sh * 0.06,
           alignment: Alignment.center,
           child: const Image(
-            image: AssetImage('assets/img/ev_logo.png'),
+            image: AssetImage('assets/img/Evie_Logo.png'),
             color: Colors.white,
           ),
         ),
